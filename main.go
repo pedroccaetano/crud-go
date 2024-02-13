@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/pedroccaetano/crud-go/src/configuration/database/mongodb"
 	"github.com/pedroccaetano/crud-go/src/configuration/logger"
 	"github.com/pedroccaetano/crud-go/src/controller"
 	"github.com/pedroccaetano/crud-go/src/controller/routes"
@@ -17,6 +18,8 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
+	mongodb.InitConnection()
 
 	// Init depencies
 	service := service.NewUserDomainService()
@@ -32,7 +35,7 @@ func main() {
 
 	routes.InitRoutes(&router.RouterGroup, userController)
 
-	if err := router.Run(":8080"); err != nil {
+	if err := router.Run("localhost:8080"); err != nil {
 		log.Fatal(err)
 	}
 }
