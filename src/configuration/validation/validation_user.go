@@ -3,7 +3,6 @@ package validation
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/locales/en"
@@ -28,9 +27,7 @@ func init() {
 	}
 }
 
-func ValidateUserError(
-	validation_err error,
-) *rest_err.RestErr {
+func ValidateUserError(validation_err error) *rest_err.RestErr {
 	var jsonErr *json.UnmarshalTypeError
 	var jsonValidationError validator.ValidationErrors
 
